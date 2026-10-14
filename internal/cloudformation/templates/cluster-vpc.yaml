@@ -8,6 +8,14 @@ Parameters:
     AllowedPattern: '^[a-z0-9-]+$'
     ConstraintDescription: 'Must contain only lowercase letters, numbers, and hyphens'
 
+  HostedClusterName:
+    Type: String
+    Description: 'Internal HostedCluster name used for the private hypershift.local zone; defaults to ClusterName'
+    Default: ''
+    MaxLength: 63
+    AllowedPattern: '^$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?$'
+    ConstraintDescription: 'Must be empty or a valid Kubernetes DNS label'
+
   VpcCidr:
     Type: String
     Description: 'CIDR block for the VPC'
@@ -74,6 +82,7 @@ Parameters:
       - 'false'
 
 Conditions:
+  HasHostedClusterName: !Not [!Equals [!Ref HostedClusterName, '']]
   UseSingleNat: !Equals [!Ref SingleNatGateway, 'true']
   UseMultiNat: !Not [!Condition UseSingleNat]
   HasAZ1: !Not [!Equals [!Ref AvailabilityZone1, '']]
@@ -467,14 +476,23 @@ Resources:
   HypershiftLocalZone:
     Type: AWS::Route53::HostedZone
     Properties:
-      Name: !Sub '${ClusterName}.hypershift.local'
+      Name: !If
+        - HasHostedClusterName
+        - !Sub '${HostedClusterName}.hypershift.local'
+        - !Sub '${ClusterName}.hypershift.local'
       VPCs:
         - VPCId: !Ref VPC
           VPCRegion: !Ref AWS::Region
       HostedZoneTags:
         - Key: Name
-          Value: !Sub '${ClusterName}.hypershift.local'
-        - Key: !Sub 'kubernetes.io/cluster/${ClusterName}'
+          Value: !If
+            - HasHostedClusterName
+            - !Sub '${HostedClusterName}.hypershift.local'
+            - !Sub '${ClusterName}.hypershift.local'
+        - Key: !If
+            - HasHostedClusterName
+            - !Sub 'kubernetes.io/cluster/${HostedClusterName}'
+            - !Sub 'kubernetes.io/cluster/${ClusterName}'
           Value: 'owned'
         - Key: Cluster
           Value: !Ref ClusterName
@@ -521,7 +539,7 @@ Outputs:
       Name: !Sub '${AWS::StackName}-WorkerSecurityGroupId'
 
   HypershiftLocalZoneId:
-    Description: 'Route53 hosted zone ID for {cluster}.hypershift.local PrivateLink DNS'
+    Description: 'Route53 hosted zone ID for the HostedCluster hypershift.local PrivateLink DNS'
     Value: !Ref HypershiftLocalZone
     Export:
       Name: !Sub '${AWS::StackName}-HypershiftLocalZoneId'

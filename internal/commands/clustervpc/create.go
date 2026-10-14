@@ -17,6 +17,7 @@ type createOptions struct {
 	publicSubnetCidrs  string
 	privateSubnetCidrs string
 	availabilityZones  string
+	hostedClusterName  string
 	singleNatGateway   bool
 	noWait             bool
 }
@@ -34,6 +35,9 @@ routing, security groups, and Route53 private hosted zone.
 
 Example:
   rosactl cluster-vpc create my-cluster --region us-east-1
+
+  # Name the private hosted zone for the internal HostedCluster
+  rosactl cluster-vpc create my-cluster --region us-east-1 --hosted-cluster-name hc-550e8400e29b41d
 
   # With a single availability zone
   rosactl cluster-vpc create my-cluster \
@@ -67,6 +71,7 @@ Example:
 	cmd.Flags().StringVar(&opts.publicSubnetCidrs, "public-subnet-cidrs", "10.0.101.0/24,10.0.102.0/24,10.0.103.0/24", "Comma-separated public subnet CIDRs")
 	cmd.Flags().StringVar(&opts.privateSubnetCidrs, "private-subnet-cidrs", "10.0.0.0/19,10.0.32.0/19,10.0.64.0/19", "Comma-separated private subnet CIDRs")
 	cmd.Flags().StringVar(&opts.availabilityZones, "availability-zones", "", "Comma-separated availability zone names, e.g. us-east-1a,us-east-1b (optional, auto-detected if empty)")
+	cmd.Flags().StringVar(&opts.hostedClusterName, "hosted-cluster-name", "", "Internal HostedCluster name for the private hosted zone; defaults to the Cluster name")
 	cmd.Flags().BoolVar(&opts.singleNatGateway, "single-nat-gateway", true, "Use single NAT gateway (true=cost savings, false=HA per-AZ)")
 	cmd.Flags().BoolVar(&opts.noWait, "no-wait", false, "Return immediately without waiting for stack creation to complete")
 
@@ -85,6 +90,11 @@ func runCreate(ctx context.Context, opts *createOptions) error {
 	if err != nil {
 		return fmt.Errorf("failed to load AWS config: %w", err)
 	}
+	hostedClusterName := opts.hostedClusterName
+	if hostedClusterName == "" {
+		hostedClusterName = opts.clusterName
+	}
+	fmt.Printf("   Private hosted zone: %s.hypershift.local\n", hostedClusterName)
 
 	// Parse CIDR lists
 	publicSubnets := strings.Split(opts.publicSubnetCidrs, ",")
@@ -99,6 +109,7 @@ func runCreate(ctx context.Context, opts *createOptions) error {
 	// Create service request
 	req := &clustervpc.CreateVPCRequest{
 		ClusterName:        opts.clusterName,
+		HostedClusterName:  opts.hostedClusterName,
 		VpcCidr:            opts.vpcCidr,
 		PublicSubnetCidrs:  publicSubnets,
 		PrivateSubnetCidrs: privateSubnets,
