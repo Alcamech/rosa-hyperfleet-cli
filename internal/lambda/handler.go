@@ -23,6 +23,7 @@ type Event struct {
 	PrivateSubnetCidrs []string `json:"private_subnet_cidrs,omitempty"`
 	AvailabilityZones  []string `json:"availability_zones,omitempty"`
 	SingleNatGateway   bool     `json:"single_nat_gateway,omitempty"`
+	HostedClusterName  string   `json:"hosted_cluster_name,omitempty"`
 }
 
 // Response represents the Lambda function output
@@ -141,6 +142,7 @@ func applyClusterVPC(ctx context.Context, event Event) (Response, error) {
 	// Call service layer
 	result, err := clustervpc.CreateVPC(ctx, &clustervpc.CreateVPCRequest{
 		ClusterName:        event.ClusterName,
+		HostedClusterName:  event.HostedClusterName,
 		VpcCidr:            event.VpcCidr,
 		PublicSubnetCidrs:  event.PublicSubnetCidrs,
 		PrivateSubnetCidrs: event.PrivateSubnetCidrs,

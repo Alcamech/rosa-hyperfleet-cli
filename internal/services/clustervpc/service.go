@@ -19,6 +19,7 @@ import (
 
 type CreateVPCRequest struct {
 	ClusterName        string
+	HostedClusterName  string
 	VpcCidr            string
 	PublicSubnetCidrs  []string
 	PrivateSubnetCidrs []string
@@ -43,6 +44,7 @@ var azPattern = regexp.MustCompile(`^[a-z]{2}-[a-z]+-\d[a-z]$`)
 
 // CreateVPC creates cluster VPC resources via CloudFormation
 func CreateVPC(ctx context.Context, req *CreateVPCRequest) (*CreateVPCResponse, error) {
+	hostedClusterName := req.HostedClusterName
 	if len(req.AvailabilityZones) < 1 {
 		return nil, fmt.Errorf("at least 1 availability zone is required")
 	}
@@ -66,6 +68,9 @@ func CreateVPC(ctx context.Context, req *CreateVPCRequest) (*CreateVPCResponse, 
 	params := map[string]string{
 		"ClusterName":      req.ClusterName,
 		"SingleNatGateway": fmt.Sprintf("%t", req.SingleNatGateway),
+	}
+	if hostedClusterName != "" {
+		params["HostedClusterName"] = hostedClusterName
 	}
 
 	// Add optional parameters
@@ -127,7 +132,7 @@ func CreateVPC(ctx context.Context, req *CreateVPCRequest) (*CreateVPCResponse, 
 		// Check if stack already exists, try update instead
 		var alreadyExistsErr *cloudformation.StackAlreadyExistsError
 		if errors.As(err, &alreadyExistsErr) {
-			return updateVPC(ctx, cfnClient, req, stackName, templateBody)
+			return updateVPC(ctx, cfnClient, req, stackName, templateBody, hostedClusterName)
 		}
 		return nil, fmt.Errorf("failed to create stack: %w", err)
 	}
@@ -138,10 +143,13 @@ func CreateVPC(ctx context.Context, req *CreateVPCRequest) (*CreateVPCResponse, 
 	}, nil
 }
 
-func updateVPC(ctx context.Context, cfnClient *cloudformation.Client, req *CreateVPCRequest, stackName, templateBody string) (*CreateVPCResponse, error) {
+func updateVPC(ctx context.Context, cfnClient *cloudformation.Client, req *CreateVPCRequest, stackName, templateBody, hostedClusterName string) (*CreateVPCResponse, error) {
 	params := map[string]string{
 		"ClusterName":      req.ClusterName,
 		"SingleNatGateway": fmt.Sprintf("%t", req.SingleNatGateway),
+	}
+	if hostedClusterName != "" {
+		params["HostedClusterName"] = hostedClusterName
 	}
 
 	// Add optional parameters
