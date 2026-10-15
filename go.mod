@@ -19,8 +19,8 @@ require (
 	github.com/aws/smithy-go v1.27.9
 	github.com/onsi/ginkgo/v2 v2.29.0
 	github.com/onsi/gomega v1.42.1
-	github.com/openshift-online/rosa-hyperfleet-api/api v0.0.0
-	github.com/openshift-online/rosa-hyperfleet-api/clientset v0.0.0-20260825215224-aaca052bcde7
+	github.com/openshift-online/rosa-hyperfleet-api/api v0.1.20
+	github.com/openshift-online/rosa-hyperfleet-api/clientset v0.1.19
 	github.com/spf13/cobra v1.10.2
 	k8s.io/apimachinery v0.36.3
 )
@@ -93,7 +93,3 @@ require (
 	sigs.k8s.io/structured-merge-diff/v6 v6.4.2 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
-
-replace github.com/openshift-online/rosa-hyperfleet-api/api v0.0.0 => github.com/gdbranco/rosa-hyperfleet-api/api v0.1.16-ec.1
-
-replace github.com/openshift-online/rosa-hyperfleet-api/clientset v0.0.0-20260825215224-aaca052bcde7 => github.com/gdbranco/rosa-hyperfleet-api/clientset v0.1.16-ec.1
