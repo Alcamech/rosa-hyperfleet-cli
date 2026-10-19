@@ -4,7 +4,7 @@ import (
 	"io"
 	"testing"
 
-	v1alpha1 "github.com/openshift-online/rosa-hyperfleet-api/api/v1alpha1/public"
+	v1alpha1 "github.com/openshift-online/rosa-seaplane-api/api/v1alpha1/public"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 

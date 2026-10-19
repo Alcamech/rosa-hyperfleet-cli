@@ -6,10 +6,10 @@ import (
 
 	awssdk "github.com/aws/aws-sdk-go-v2/aws"
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
-	v1alpha1 "github.com/openshift-online/rosa-hyperfleet-api/api/v1alpha1/public"
-	hyperfleet "github.com/openshift-online/rosa-hyperfleet-api/clientset"
-	"github.com/openshift-online/rosa-hyperfleet-api/clientset/platform"
-	hfrest "github.com/openshift-online/rosa-hyperfleet-api/clientset/rest"
+	v1alpha1 "github.com/openshift-online/rosa-seaplane-api/api/v1alpha1/public"
+	seaplane "github.com/openshift-online/rosa-seaplane-api/clientset"
+	"github.com/openshift-online/rosa-seaplane-api/clientset/platform"
+	hfrest "github.com/openshift-online/rosa-seaplane-api/clientset/rest"
 	pkgconfig "github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 )
 
@@ -26,7 +26,7 @@ func fetchAPIURL(ctx context.Context, baseURL, clusterName string, creds awssdk.
 	}
 
 	// Create clientset
-	cs, err := hyperfleet.NewForConfig(&hfrest.Config{
+	cs, err := seaplane.NewForConfig(&hfrest.Config{
 		Host:      baseURL,
 		AccountID: accountID,
 		AWSConfig: awsCfg,
@@ -36,7 +36,7 @@ func fetchAPIURL(ctx context.Context, baseURL, clusterName string, creds awssdk.
 	}
 
 	// Get cluster to access status
-	cluster, err := cs.HyperfleetV1alpha1().Clusters().Get(ctx, clusterName, platform.GetOptions{})
+	cluster, err := cs.SeaplaneV1alpha1().Clusters().Get(ctx, clusterName, platform.GetOptions{})
 	if err != nil {
 		return "", fmt.Errorf("failed to fetch cluster %q: %w", clusterName, err)
 	}
@@ -59,7 +59,7 @@ func fetchClusterByName(ctx context.Context, baseURL, clusterName string, creds 
 		return nil, fmt.Errorf("failed to get account ID: %w", err)
 	}
 
-	cs, err := hyperfleet.NewForConfig(&hfrest.Config{
+	cs, err := seaplane.NewForConfig(&hfrest.Config{
 		Host:      baseURL,
 		AccountID: accountID,
 		AWSConfig: awsCfg,
@@ -68,7 +68,7 @@ func fetchClusterByName(ctx context.Context, baseURL, clusterName string, creds 
 		return nil, fmt.Errorf("failed to create clientset: %w", err)
 	}
 
-	cluster, err := cs.HyperfleetV1alpha1().Clusters().Get(ctx, clusterName, platform.GetOptions{})
+	cluster, err := cs.SeaplaneV1alpha1().Clusters().Get(ctx, clusterName, platform.GetOptions{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to get cluster %q: %w", clusterName, err)
 	}

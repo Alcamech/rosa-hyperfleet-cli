@@ -81,7 +81,7 @@ Documentation writing guidelines:
 | Document                                         | Purpose                                                             |
 | ------------------------------------------------ | ------------------------------------------------------------------- |
 | [reference-gist-1.md](specs/reference-gist-1.md) | Deep dive into OIDC/STS cross-account authentication in ROSA HCP    |
-| [references.md](specs/references.md)             | External project references (hypershift, rosa, rosa-hyperfleet-api) |
+| [references.md](specs/references.md)             | External project references (hypershift, rosa, rosa-seaplane-api) |
 
 ## 🚀 Getting Started
 
@@ -180,8 +180,8 @@ See [DOCUMENTATION.md](guides/DOCUMENTATION.md) for detailed guidelines.
 - [Main README](../README.md) - Project README
 - [LocalStack Testing Guide](../test/localstack/README.md) - Integration testing guide
 - [Makefile](../Makefile) - Build targets and commands
-- [GitHub Repository](https://github.com/openshift-online/rosa-hyperfleet-cli)
-- [ROSA HyperFleet Platform](https://github.com/openshift-online/rosa-hyperfleet) - Reference implementation
+- [GitHub Repository](https://github.com/openshift-online/rosa-seaplane-cli)
+- [ROSA HyperFleet Platform](https://github.com/openshift-online/rosa-seaplane) - Reference implementation
 - [HyperShift](https://github.com/openshift/hypershift) - OIDC implementation reference
 
 ---

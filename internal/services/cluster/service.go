@@ -11,10 +11,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
-	v1alpha1 "github.com/openshift-online/rosa-hyperfleet-api/api/v1alpha1/public"
-	hyperfleet "github.com/openshift-online/rosa-hyperfleet-api/clientset"
-	"github.com/openshift-online/rosa-hyperfleet-api/clientset/platform"
-	hfrest "github.com/openshift-online/rosa-hyperfleet-api/clientset/rest"
+	v1alpha1 "github.com/openshift-online/rosa-seaplane-api/api/v1alpha1/public"
+	seaplane "github.com/openshift-online/rosa-seaplane-api/clientset"
+	"github.com/openshift-online/rosa-seaplane-api/clientset/platform"
+	hfrest "github.com/openshift-online/rosa-seaplane-api/clientset/rest"
 	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws/cloudformation"
 	pkgconfig "github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 )
@@ -254,7 +254,7 @@ func SubmitCluster(ctx context.Context, req *SubmitClusterRequest) (*SubmitClust
 	}
 
 	// Create clientset
-	cs, err := hyperfleet.NewForConfig(&hfrest.Config{
+	cs, err := seaplane.NewForConfig(&hfrest.Config{
 		Host:      req.PlatformAPIURL,
 		AccountID: accountID,
 		AWSConfig: awsCfg,
@@ -264,7 +264,7 @@ func SubmitCluster(ctx context.Context, req *SubmitClusterRequest) (*SubmitClust
 	}
 
 	// Create cluster via clientset
-	createdCluster, err := cs.HyperfleetV1alpha1().Clusters().Create(ctx, cluster, platform.CreateOptions{})
+	createdCluster, err := cs.SeaplaneV1alpha1().Clusters().Create(ctx, cluster, platform.CreateOptions{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to create cluster: %w", err)
 	}
