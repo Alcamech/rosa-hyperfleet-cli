@@ -9,9 +9,9 @@ import (
 	"time"
 
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
-	hyperfleet "github.com/openshift-online/rosa-hyperfleet-api/clientset"
-	"github.com/openshift-online/rosa-hyperfleet-api/clientset/platform"
-	hfrest "github.com/openshift-online/rosa-hyperfleet-api/clientset/rest"
+	seaplane "github.com/openshift-online/rosa-seaplane-api/clientset"
+	"github.com/openshift-online/rosa-seaplane-api/clientset/platform"
+	hfrest "github.com/openshift-online/rosa-seaplane-api/clientset/rest"
 	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
 	"github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 	"github.com/spf13/cobra"
@@ -79,7 +79,7 @@ func runDeleteCluster(ctx context.Context, clusterName string, opts *deleteOptio
 	}
 
 	// Create clientset
-	cs, err := hyperfleet.NewForConfig(&hfrest.Config{
+	cs, err := seaplane.NewForConfig(&hfrest.Config{
 		Host:      baseURL,
 		AccountID: accountID,
 		AWSConfig: awsCfg,
@@ -88,7 +88,7 @@ func runDeleteCluster(ctx context.Context, clusterName string, opts *deleteOptio
 		return fmt.Errorf("failed to create clientset: %w", err)
 	}
 
-	cluster, err := cs.HyperfleetV1alpha1().Clusters().Get(ctx, clusterName, platform.GetOptions{})
+	cluster, err := cs.SeaplaneV1alpha1().Clusters().Get(ctx, clusterName, platform.GetOptions{})
 	if err != nil {
 		if k8serrors.IsNotFound(err) {
 			return fmt.Errorf("cluster %q not found", clusterName)
@@ -110,7 +110,7 @@ func runDeleteCluster(ctx context.Context, clusterName string, opts *deleteOptio
 	}
 
 	// Delete cluster via clientset
-	if err := cs.HyperfleetV1alpha1().Clusters().Delete(ctx, cluster.Name, platform.DeleteOptions{}); err != nil {
+	if err := cs.SeaplaneV1alpha1().Clusters().Delete(ctx, cluster.Name, platform.DeleteOptions{}); err != nil {
 		if k8serrors.IsNotFound(err) {
 			return fmt.Errorf("cluster %q not found (may have already been deleted)", cluster.Name)
 		}
@@ -133,7 +133,7 @@ func runDeleteCluster(ctx context.Context, clusterName string, opts *deleteOptio
 	for time.Now().Before(deadline) {
 		time.Sleep(pollInterval)
 
-		_, err := cs.HyperfleetV1alpha1().Clusters().Get(ctx, cluster.Name, platform.GetOptions{})
+		_, err := cs.SeaplaneV1alpha1().Clusters().Get(ctx, cluster.Name, platform.GetOptions{})
 		if err != nil {
 			if k8serrors.IsNotFound(err) {
 				fmt.Fprintf(os.Stderr, "Cluster %q deleted successfully.\n", cluster.Name)

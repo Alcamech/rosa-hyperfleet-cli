@@ -149,9 +149,9 @@ rosactl bootstrap create --image-uri 123456789012.dkr.ecr.us-east-1.amazonaws.co
 Output:
 
 ```
-Creating CloudFormation stack: rosa-hyperfleet-bootstrap
+Creating CloudFormation stack: rosa-seaplane-bootstrap
 Lambda function created successfully!
-ARN: arn:aws:lambda:us-east-1:123456789012:function:rosa-hyperfleet-lambda
+ARN: arn:aws:lambda:us-east-1:123456789012:function:rosa-seaplane-lambda
 ```
 
 ````

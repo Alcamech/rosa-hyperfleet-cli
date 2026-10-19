@@ -8,8 +8,8 @@ Manages VPC networking, IAM roles, OIDC providers, cluster creation, and node po
 
 ```bash
 # Build
-git clone https://github.com/openshift-online/rosa-hyperfleet-cli.git
-cd rosa-hyperfleet-cli
+git clone https://github.com/openshift-online/rosa-seaplane-cli.git
+cd rosa-seaplane-cli
 make build
 
 # Install globally (optional)
@@ -402,7 +402,7 @@ See [docs/guides/VERSIONING.md](docs/guides/VERSIONING.md) for details.
 ### Project Structure
 
 ```
-rosa-hyperfleet-cli/
+rosa-seaplane-cli/
 ├── cmd/rosactl/                     # Entry point
 ├── internal/
 │   ├── commands/                    # CLI commands (Cobra)

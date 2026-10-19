@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
-	hyperfleet "github.com/openshift-online/rosa-hyperfleet-api/clientset"
-	"github.com/openshift-online/rosa-hyperfleet-api/clientset/platform"
-	hfrest "github.com/openshift-online/rosa-hyperfleet-api/clientset/rest"
+	seaplane "github.com/openshift-online/rosa-seaplane-api/clientset"
+	"github.com/openshift-online/rosa-seaplane-api/clientset/platform"
+	hfrest "github.com/openshift-online/rosa-seaplane-api/clientset/rest"
 	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
 	"github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 	"github.com/spf13/cobra"
@@ -72,7 +72,7 @@ func runDelete(ctx context.Context, nodepoolName string, opts *deleteOptions) er
 	}
 
 	// Create clientset
-	cs, err := hyperfleet.NewForConfig(&hfrest.Config{
+	cs, err := seaplane.NewForConfig(&hfrest.Config{
 		Host:      baseURL,
 		AccountID: accountID,
 		AWSConfig: awsCfg,
@@ -81,7 +81,7 @@ func runDelete(ctx context.Context, nodepoolName string, opts *deleteOptions) er
 		return fmt.Errorf("failed to create clientset: %w", err)
 	}
 
-	nodepools := cs.HyperfleetV1alpha1().NodePools()
+	nodepools := cs.SeaplaneV1alpha1().NodePools()
 	nodepool, err := nodepools.Get(ctx, nodepoolName, platform.GetOptions{})
 	if err != nil {
 		if k8serrors.IsNotFound(err) {

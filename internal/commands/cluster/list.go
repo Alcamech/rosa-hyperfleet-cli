@@ -8,10 +8,10 @@ import (
 	"text/tabwriter"
 
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
-	v1alpha1 "github.com/openshift-online/rosa-hyperfleet-api/api/v1alpha1/public"
-	hyperfleet "github.com/openshift-online/rosa-hyperfleet-api/clientset"
-	"github.com/openshift-online/rosa-hyperfleet-api/clientset/platform"
-	hfrest "github.com/openshift-online/rosa-hyperfleet-api/clientset/rest"
+	v1alpha1 "github.com/openshift-online/rosa-seaplane-api/api/v1alpha1/public"
+	seaplane "github.com/openshift-online/rosa-seaplane-api/clientset"
+	"github.com/openshift-online/rosa-seaplane-api/clientset/platform"
+	hfrest "github.com/openshift-online/rosa-seaplane-api/clientset/rest"
 	"github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 	"github.com/spf13/cobra"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -70,7 +70,7 @@ func runList(ctx context.Context, opts *listOptions) error {
 		return fmt.Errorf("failed to get account ID: %w", err)
 	}
 
-	cs, err := hyperfleet.NewForConfig(&hfrest.Config{
+	cs, err := seaplane.NewForConfig(&hfrest.Config{
 		Host:      baseURL,
 		AccountID: accountID,
 		AWSConfig: awsCfg,
@@ -84,7 +84,7 @@ func runList(ctx context.Context, opts *listOptions) error {
 		Offset: int64(opts.offset),
 	}
 
-	clusterList, err := cs.HyperfleetV1alpha1().Clusters().List(ctx, listOpts)
+	clusterList, err := cs.SeaplaneV1alpha1().Clusters().List(ctx, listOpts)
 	if err != nil {
 		return fmt.Errorf("failed to list clusters: %w", err)
 	}

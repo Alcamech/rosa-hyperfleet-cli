@@ -23,8 +23,8 @@ go install github.com/s0ders/go-semver-release@latest
 1. Clone the repository
 
 ```bash
-git clone https://github.com/openshift-online/rosa-hyperfleet-cli.git
-cd rosa-hyperfleet-cli
+git clone https://github.com/openshift-online/rosa-seaplane-cli.git
+cd rosa-seaplane-cli
 ```
 
 2. Install Go dependencies
@@ -314,7 +314,7 @@ docker push <account>.dkr.ecr.us-east-1.amazonaws.com/rosactl:latest
 ## Project Structure
 
 ```text
-rosa-hyperfleet-cli/
+rosa-seaplane-cli/
 ├── cmd/rosactl/                     # Entry point (main.go)
 ├── internal/
 │   ├── commands/                    # CLI command groups

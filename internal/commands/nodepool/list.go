@@ -9,10 +9,10 @@ import (
 	"text/tabwriter"
 
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
-	v1alpha1 "github.com/openshift-online/rosa-hyperfleet-api/api/v1alpha1/public"
-	hyperfleet "github.com/openshift-online/rosa-hyperfleet-api/clientset"
-	"github.com/openshift-online/rosa-hyperfleet-api/clientset/platform"
-	hfrest "github.com/openshift-online/rosa-hyperfleet-api/clientset/rest"
+	v1alpha1 "github.com/openshift-online/rosa-seaplane-api/api/v1alpha1/public"
+	seaplane "github.com/openshift-online/rosa-seaplane-api/clientset"
+	"github.com/openshift-online/rosa-seaplane-api/clientset/platform"
+	hfrest "github.com/openshift-online/rosa-seaplane-api/clientset/rest"
 	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
 	"github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 	"github.com/spf13/cobra"
@@ -89,7 +89,7 @@ func runList(ctx context.Context, opts *listOptions) error {
 	}
 
 	// Create clientset
-	cs, err := hyperfleet.NewForConfig(&hfrest.Config{
+	cs, err := seaplane.NewForConfig(&hfrest.Config{
 		Host:      baseURL,
 		AccountID: accountID,
 		AWSConfig: awsCfg,
@@ -102,7 +102,7 @@ func runList(ctx context.Context, opts *listOptions) error {
 	// validated <cluster-name>.<child-name> convention, then apply pagination
 	// to that cluster's results.
 	const pageSize = int64(100)
-	nodepools := cs.HyperfleetV1alpha1().NodePools()
+	nodepools := cs.SeaplaneV1alpha1().NodePools()
 	var clusterNodePools []v1alpha1.NodePool
 	for offset := int64(0); ; offset += pageSize {
 		page, err := nodepools.List(ctx, platform.NodePoolListOptions{Limit: pageSize, Offset: offset})

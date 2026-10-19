@@ -16,7 +16,7 @@ This document lists GitHub repositories that serve as guardrails and guidelines 
 
 - hypershift cli can create oidc provider in the customer account, some of our cli functions can draw from this repository
 
-### [rosa-hyperfleet-api](https://github.com/openshift-online/rosa-hyperfleet-api)
+### [rosa-seaplane-api](https://github.com/openshift-online/rosa-seaplane-api)
 
 **Purpose:** Implements the backend passthrough api that this cli will connect to
 
