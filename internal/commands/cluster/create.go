@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"os"
 
-	v1alpha1 "github.com/openshift-online/rosa-seaplane-api/api/v1alpha1/public"
 	internalaws "github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
 	pkgconfig "github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 	clusterservice "github.com/openshift-online/rosa-regional-platform-cli/internal/services/cluster"
+	v1alpha1 "github.com/openshift-online/rosa-seaplane-api/api/v1alpha1/public"
 	"github.com/spf13/cobra"
 )
 
