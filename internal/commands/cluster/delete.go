@@ -9,11 +9,11 @@ import (
 	"time"
 
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
+	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
+	"github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 	seaplane "github.com/openshift-online/rosa-seaplane-api/clientset"
 	"github.com/openshift-online/rosa-seaplane-api/clientset/platform"
 	hfrest "github.com/openshift-online/rosa-seaplane-api/clientset/rest"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/config"
 	"github.com/spf13/cobra"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 )
