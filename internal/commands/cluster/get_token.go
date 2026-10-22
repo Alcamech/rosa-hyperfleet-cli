@@ -14,7 +14,7 @@ import (
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	iamaws "github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
+	iamaws "github.com/openshift-online/rosa-seaplane-cli/internal/aws"
 	"github.com/spf13/cobra"
 )
 

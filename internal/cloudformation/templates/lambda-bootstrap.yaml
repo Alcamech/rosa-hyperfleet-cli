@@ -4,11 +4,11 @@ Description: 'ROSA Regional Platform - Lambda Bootstrap (Container-based)'
 Parameters:
   ContainerImageURI:
     Type: String
-    Description: 'ECR container image URI (e.g., 123456789012.dkr.ecr.us-east-1.amazonaws.com/rosa-regional-platform-cli:latest)'
+    Description: 'ECR container image URI (e.g., 123456789012.dkr.ecr.us-east-1.amazonaws.com/rosa-seaplane-cli:latest)'
 
   FunctionName:
     Type: String
-    Default: 'rosa-regional-platform-lambda'
+    Default: 'rosa-seaplane-lambda'
     Description: 'Name of the Lambda function'
 
 Resources:

@@ -3,11 +3,11 @@
 BINARY_NAME=rosactl
 BUILD_DIR=./bin
 INSTALL_DIR=/usr/local/bin
-IMAGE_NAME=rosa-regional-platform-cli
+IMAGE_NAME=rosa-seaplane-cli
 IMAGE_TAG=$(shell tag=$$(git describe --tags --exact-match 2>/dev/null); if [ -n "$$tag" ]; then echo "$$tag" | sed 's/^v//'; else echo "dev"; fi)
 GIT_COMMIT=$(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 VERSION=$(shell git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo "0.1.0")
-LDFLAGS=-ldflags "-X github.com/openshift-online/rosa-regional-platform-cli/internal/commands/version.GitCommit=$(GIT_COMMIT) -X github.com/openshift-online/rosa-regional-platform-cli/internal/commands/version.Version=$(VERSION)"
+LDFLAGS=-ldflags "-X github.com/openshift-online/rosa-seaplane-cli/internal/commands/version.GitCommit=$(GIT_COMMIT) -X github.com/openshift-online/rosa-seaplane-cli/internal/commands/version.Version=$(VERSION)"
 
 TOOLS_DIR        := ./hack/tools
 TOOLS_BIN_DIR    := $(TOOLS_DIR)/bin

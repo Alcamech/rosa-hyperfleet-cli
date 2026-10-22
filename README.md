@@ -325,8 +325,8 @@ rosactl bootstrap delete --region us-east-1
 | Flag              | Default                         | Description                                   |
 | ----------------- | ------------------------------- | --------------------------------------------- |
 | `--image-uri`     |                                 | ECR container image URI (required for create) |
-| `--function-name` | `rosa-regional-platform-lambda` | Lambda function name                          |
-| `--stack-name`    | `rosa-regional-platform-lambda` | CloudFormation stack name                     |
+| `--function-name` | `rosa-seaplane-lambda` | Lambda function name                          |
+| `--stack-name`    | `rosa-seaplane-lambda` | CloudFormation stack name                     |
 | `--region`        |                                 | AWS region (required)                         |
 
 The Lambda accepts JSON event payloads with an `action` field: `apply-cluster-vpc`, `delete-cluster-vpc`, `apply-cluster-iam`, `delete-cluster-iam`.

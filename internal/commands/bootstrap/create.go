@@ -6,15 +6,15 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
-	internalaws "github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws/cloudformation"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/cloudformation/templates"
+	internalaws "github.com/openshift-online/rosa-seaplane-cli/internal/aws"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/aws/cloudformation"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/cloudformation/templates"
 	"github.com/spf13/cobra"
 )
 
 const (
-	defaultStackName    = "rosa-regional-platform-lambda"
-	defaultFunctionName = "rosa-regional-platform-lambda"
+	defaultStackName    = "rosa-seaplane-lambda"
+	defaultFunctionName = "rosa-seaplane-lambda"
 	defaultTimeout      = 10 * time.Minute
 )
 

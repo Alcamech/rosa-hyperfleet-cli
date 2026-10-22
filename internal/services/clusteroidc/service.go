@@ -9,9 +9,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws/cloudformation"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/cloudformation/templates"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/crypto"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/aws/cloudformation"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/cloudformation/templates"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/crypto"
 )
 
 type CreateOIDCRequest struct {

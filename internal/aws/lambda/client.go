@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
-	awsconfig "github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
+	awsconfig "github.com/openshift-online/rosa-seaplane-cli/internal/aws"
 )
 
 type Client struct {

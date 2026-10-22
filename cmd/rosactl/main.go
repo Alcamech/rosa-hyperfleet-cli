@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/commands"
-	lambdaHandler "github.com/openshift-online/rosa-regional-platform-cli/internal/lambda"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/commands"
+	lambdaHandler "github.com/openshift-online/rosa-seaplane-cli/internal/lambda"
 )
 
 func main() {

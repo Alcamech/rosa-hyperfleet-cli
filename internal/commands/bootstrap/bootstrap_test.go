@@ -4,7 +4,7 @@ import (
 	"io"
 	"testing"
 
-	internalaws "github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
+	internalaws "github.com/openshift-online/rosa-seaplane-cli/internal/aws"
 )
 
 func TestBootstrapCreate_RegionRequired(t *testing.T) {

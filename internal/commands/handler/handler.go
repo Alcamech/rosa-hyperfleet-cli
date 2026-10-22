@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/lambda"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/lambda"
 	"github.com/spf13/cobra"
 )
 
