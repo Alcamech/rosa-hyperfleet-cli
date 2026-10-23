@@ -6,9 +6,9 @@ import (
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/crypto"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/services/clusteriam"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/services/clustervpc"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/crypto"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/services/clusteriam"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/services/clustervpc"
 )
 
 // Event represents the Lambda function input

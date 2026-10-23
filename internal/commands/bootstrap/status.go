@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	internalaws "github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/aws/cloudformation"
+	internalaws "github.com/openshift-online/rosa-seaplane-cli/internal/aws"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/aws/cloudformation"
 	"github.com/spf13/cobra"
 )
 

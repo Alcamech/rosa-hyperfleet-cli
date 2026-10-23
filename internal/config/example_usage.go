@@ -5,7 +5,7 @@ package config
 // import (
 //     "fmt"
 //     "net/http"
-//     "github.com/openshift-online/rosa-regional-platform-cli/internal/config"
+//     "github.com/openshift-online/rosa-seaplane-cli/internal/config"
 // )
 //
 // func callPlatformAPI() error {

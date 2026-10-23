@@ -1,4 +1,4 @@
-module github.com/openshift-online/rosa-regional-platform-cli
+module github.com/openshift-online/rosa-seaplane-cli
 
 go 1.26.5
 

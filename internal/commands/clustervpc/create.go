@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	internalaws "github.com/openshift-online/rosa-regional-platform-cli/internal/aws"
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/services/clustervpc"
+	internalaws "github.com/openshift-online/rosa-seaplane-cli/internal/aws"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/services/clustervpc"
 	"github.com/spf13/cobra"
 )
 

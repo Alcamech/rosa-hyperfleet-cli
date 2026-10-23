@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/openshift-online/rosa-regional-platform-cli/internal/config"
+	"github.com/openshift-online/rosa-seaplane-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
